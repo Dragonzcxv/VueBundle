@@ -1,0 +1,756 @@
+// Складируйте сюда все миксины, используемые на сайте
+
+// устанавливаем максимальную ширину и паддинг для блока (с учётом адаптива)
+@mixin content-max-width() {
+	box-sizing: border-box;
+	max-width: $content-width-max;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: $content-padding-min;
+	padding-right: $content-padding-min;
+
+	// больше минималки (мобилка)
+	@media (min-width: $content-width-min + 1) {
+		padding-left: $content-padding-mobile;
+		padding-right: $content-padding-mobile;
+	}
+
+	// больше мобилки (средняя)
+	@media (min-width: $content-width-mobile + 1) {
+		max-width: 100%;
+		padding-left: $content-padding-middle;
+		padding-right: $content-padding-middle;
+	}
+
+	// больше средней (большая)
+	@media (min-width: $content-width-middle + 1) {
+		max-width: 100%;
+		padding-left: $content-padding-max;
+		padding-right: $content-padding-max;
+	}
+
+	// при экранах больше максимальной ширины (+ 100 пикселей для плавности)
+	@media (min-width: $content-width-max + 100) {
+		max-width: $content-width-max;
+		padding-left: $content-padding-over-max;
+		padding-right: $content-padding-over-max;
+	}
+}
+
+// задаёт отступы слева/справа для b-layout__main (блок, где лежит текст страницы)
+@mixin main-paddings() {
+	padding-left: $main-padding-min;
+	padding-right: $main-padding-min;
+
+	// больше минималки (мобилка)
+	@media (min-width: $content-width-min + 1) {
+		padding-left: $main-padding-mobile;
+		padding-right: $main-padding-mobile;
+	}
+
+	// больше мобилки (средняя)
+	@media (min-width: $content-width-mobile + 1) {
+		padding-left: $main-padding-middle;
+		padding-right: $main-padding-middle;
+	}
+
+	// больше средней (большая)
+	@media (min-width: $content-width-middle + 1) {
+		padding-left: $main-padding-max;
+		padding-right: $main-padding-max;
+	}
+
+	// при экранах больше максимальной ширины (+ 100 пикселей для плавности)
+	@media (min-width: $content-width-max + 100) {
+		padding-left: $main-padding-over-max;
+		padding-right: $main-padding-over-max;
+	}
+}
+
+// задаёт брекпоинт по ширине
+// $size: 'content-width-max' | 'content-width-middle' | 'content-width-mobile' | 'content-width-min' | $breakpoints-width | 1300px
+// $direction: 'up' | 'down' - направление (min-width или max-width)
+// @include for-width ('content-width-max') {}
+// $orientation: '' | 'portrait' | 'landscape' - добавить к условию ориентацию экрана
+@mixin for-width($size, $direction: 'up', $orientation: '') {
+	$media-rule: '';
+	$media: 'min-width';
+	$sizee: '';
+
+	@if $orientation != '' {
+		$media-rule: '(orientation: ' + $orientation + ')';
+	}
+
+	@if $direction == 'down' {
+		$media: 'max-width';
+	}
+
+	@if $size == 'content-width-max' {
+		$sizee: $content-width-max + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-max;
+		}
+	}
+
+	@if $size == 'content-width-middle' {
+		$sizee: $content-width-middle + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-middle;
+		}
+	}
+
+	@if $size == 'content-width-mobile' {
+		$sizee: $content-width-mobile + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-mobile;
+		}
+	}
+
+	@if $size == 'content-width-min' {
+		$sizee: $content-width-min + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-min;
+		}
+	}
+
+	@if $sizee == '' {
+		$sizee: map-get($breakpoints-width, $size);
+	}
+
+	@if $sizee == null {
+		$sizee: $size;
+	}
+
+	@if $media-rule != '' {
+		$media-rule: $media-rule + ' and ' + '('+$media+': '+$sizee+')';
+	}
+
+	@else {
+		$media-rule: '('+$media+': '+$sizee+')';
+	}
+
+	@media #{$media-rule} { @content; }
+}
+
+// задаёт брекпоинт по высоте
+// $size: 'content-width-max' | 'content-width-middle' | 'content-width-mobile' | 'content-width-min' | $breakpoints-height
+// $direction: 'up' | 'down' - направление (min-height или max-height)
+// @include for-height ('content-width-max') {}
+// $orientation: '' | 'portrait' | 'landscape' - добавить к условию ориентацию экрана
+@mixin for-height($size, $direction: 'up', $orientation: '') {
+	$media-rule: '';
+	$media: 'min-height';
+	$sizee: '';
+
+	@if $orientation != '' {
+		$media-rule: '(orientation: ' + $orientation + ')';
+	}
+
+	@if $direction == 'down' {
+		$media: 'max-height';
+	}
+
+	@if $size == 'content-width-max' {
+		$sizee: $content-width-max + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-max;
+		}
+	}
+
+	@if $size == 'content-width-middle' {
+		$sizee: $content-width-middle + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-middle;
+		}
+	}
+
+	@if $size == 'content-width-mobile' {
+		$sizee: $content-width-mobile + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-mobile;
+		}
+	}
+
+	@if $size == 'content-width-min' {
+		$sizee: $content-width-min + 1;
+
+		@if $direction == 'down' {
+			$sizee: $content-width-min;
+		}
+	}
+
+	@if $sizee == '' {
+		$sizee: map-get($breakpoints-height, $size);
+	}
+
+	@if $sizee == null {
+		$sizee: $size;
+	}
+
+	@if $media-rule != '' {
+		$media-rule: $media-rule + ' and ' + '('+$media+': '+$sizee+')';
+	}
+
+	@else {
+		$media-rule: '('+$media+': '+$sizee+')';
+	}
+
+	@media #{$media-rule} { @content; }
+}
+
+// растягиваем элемент на всю ширину окна
+@mixin layout-negative-margin-global($side: left) {
+	$indent: calc((50vw - 50%) * -1);
+
+	@if $side == 'left' {
+		width: calc(100% + ((100vw - 100%) / 2));
+		margin-left: #{$indent} !important;
+	}
+
+	@if $side == 'right' {
+		width: calc(100% + ((100vw - 100%) / 2));
+		margin-right: #{$indent} !important;
+	}
+
+	@if $side == 'all' {
+		width: 100vw;
+		margin-left: #{$indent} !important;
+	}
+}
+
+// миксин даёт отрицательные маржины (слева/справа) равные паддингу заданному в $main-padding- переменных
+// $side: left|right|all - с какой стороны давать маржины
+// $content-indent: false|true - плюсовать ли паддинги заданные в $content-padding- переменных
+// так же есть классы: .l-stretch-left, .l-stretch-right, .l-stretch-all для маржинов с $content-indent: false
+// так же есть классы: .l-stretch-left-all, .l-stretch-right-all, .l-stretch-all-all для маржинов с $content-indent: true
+@mixin layout-negative-margin($side: left, $content-indent: false) {
+	$cur-padding: if($content-indent, $main-padding-min + $content-padding-min, $main-padding-min);
+
+	@if $side == 'left' {
+		margin-left: (-1 * $cur-padding) !important;
+	}
+
+	@if $side == 'right' {
+		margin-right: (-1 * $cur-padding) !important;
+	}
+
+	@if $side == 'all' {
+		margin-left: (-1 * $cur-padding) !important;
+		margin-right: (-1 * $cur-padding) !important;
+	}
+
+	@if $side == 'top' {
+		margin-right: (-1 * $cur-padding) !important;
+	}
+
+	@if $side == 'bottom' {
+		margin-right: (-1 * $cur-padding) !important;
+	}
+
+	// больше минималки (мобилка)
+	@media (min-width: $content-width-min + 1) {
+		$cur-padding: if($content-indent, $main-padding-mobile + $content-padding-mobile, $main-padding-mobile);
+
+		@if $side == 'left' {
+			margin-left: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'right' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'all' {
+			margin-left: (-1 * $cur-padding) !important;
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'top' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'bottom' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+	}
+
+	// больше мобилки (средняя)
+	@media (min-width: $content-width-mobile + 1) {
+		$cur-padding: if($content-indent, $main-padding-middle + $content-padding-middle, $main-padding-middle);
+
+		@if $side == 'left' {
+			margin-left: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'right' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'all' {
+			margin-left: (-1 * $cur-padding) !important;
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'top' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'bottom' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+	}
+
+	// больше средней (большая)
+	@media (min-width: $content-width-middle + 1) {
+		$cur-padding: if($content-indent, $main-padding-max + $content-padding-max, $main-padding-max);
+
+		@if $side == 'left' {
+			margin-left: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'right' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'all' {
+			margin-left: (-1 * $cur-padding) !important;
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'top' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'bottom' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+	}
+
+	// при экранах больше максимальной ширины (+ 100 пикселей для плавности)
+	@media (min-width: $content-width-max + 100) {
+		$cur-padding: if($content-indent, $main-padding-over-max + $content-padding-over-max, $main-padding-over-max);
+
+		@if $side == 'left' {
+			margin-left: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'right' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'all' {
+			margin-left: (-1 * $cur-padding) !important;
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'top' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+
+		@if $side == 'bottom' {
+			margin-right: (-1 * $cur-padding) !important;
+		}
+	}
+}
+
+// даёт блоку паддинг соответствующий отрицательному маржину у миксина layout-negative-margin
+// это для того, чтобы текст у растянутых элементов был с теми же отступами, что и весь текст сайта
+// автоматом применяется к элементу с классом l-stretch-content или l-stretch-content-margin
+// элемент должен быть в одном из блоков с классом l-stretch-...
+@mixin layout-negative-margin-content($side: left, $content-indent: false, $indent-margin: false) {
+	$cur-indent: if($indent-margin, 'margin', 'padding');
+	$cur-padding: if($content-indent, $main-padding-min + $content-padding-min, $main-padding-min);
+
+	@if $side == 'left' {
+		#{$cur-indent}-left: $cur-padding !important;
+	}
+
+	@if $side == 'right' {
+		#{$cur-indent}-right: $cur-padding !important;
+	}
+
+	@if $side == 'all' {
+		#{$cur-indent}-left: $cur-padding !important;
+		#{$cur-indent}-right: $cur-padding !important;
+	}
+
+	@if $side == 'top' {
+		#{$cur-indent}-top: $cur-padding !important;
+	}
+
+	@if $side == 'bottom' {
+		#{$cur-indent}-bottom: $cur-padding !important;
+	}
+
+	// больше минималки (мобилка)
+	@media (min-width: $content-width-min + 1) {
+		$cur-padding: if($content-indent, $main-padding-mobile + $content-padding-mobile, $main-padding-mobile);
+
+		@if $side == 'left' {
+			#{$cur-indent}-left: $cur-padding !important;
+		}
+
+		@if $side == 'right' {
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'all' {
+			#{$cur-indent}-left: $cur-padding !important;
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'top' {
+			#{$cur-indent}-top: $cur-padding !important;
+		}
+
+		@if $side == 'bottom' {
+			#{$cur-indent}-bottom: $cur-padding !important;
+		}
+	}
+
+	// больше мобилки (средняя)
+	@media (min-width: $content-width-mobile + 1) {
+		$cur-padding: if($content-indent, $main-padding-middle + $content-padding-middle, $main-padding-middle);
+
+		@if $side == 'left' {
+			#{$cur-indent}-left: $cur-padding !important;
+		}
+
+		@if $side == 'right' {
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'all' {
+			#{$cur-indent}-left: $cur-padding !important;
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'top' {
+			#{$cur-indent}-top: $cur-padding !important;
+		}
+
+		@if $side == 'bottom' {
+			#{$cur-indent}-bottom: $cur-padding !important;
+		}
+	}
+
+	// больше средней (большая)
+	@media (min-width: $content-width-middle + 1) {
+		$cur-padding: if($content-indent, $main-padding-max + $content-padding-max, $main-padding-max);
+
+		@if $side == 'left' {
+			#{$cur-indent}-left: $cur-padding !important;
+		}
+
+		@if $side == 'right' {
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'all' {
+			#{$cur-indent}-left: $cur-padding !important;
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'top' {
+			#{$cur-indent}-top: $cur-padding !important;
+		}
+
+		@if $side == 'bottom' {
+			#{$cur-indent}-bottom: $cur-padding !important;
+		}
+	}
+
+	// при экранах больше максимальной ширины (+ 100 пикселей для плавности)
+	@media (min-width: $content-width-max + 100) {
+		$cur-padding: if($content-indent, $main-padding-over-max + $content-padding-over-max, $main-padding-over-max);
+
+		@if $side == 'left' {
+			#{$cur-indent}-left: $cur-padding !important;
+		}
+
+		@if $side == 'right' {
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'all' {
+			#{$cur-indent}-left: $cur-padding !important;
+			#{$cur-indent}-right: $cur-padding !important;
+		}
+
+		@if $side == 'top' {
+			#{$cur-indent}-top: $cur-padding !important;
+		}
+
+		@if $side == 'bottom' {
+			#{$cur-indent}-bottom: $cur-padding !important;
+		}
+	}
+}
+
+// даёт блоку отступ указанный в $side: left|right|top|bottom
+// $content-indent: false|true - плюсовать ли паддинги заданные в $content-padding- переменных
+// $negative: false|true - добавлять минус или нет
+@mixin layout-absolute-indent($side: left, $content-indent: false, $negative: false) {
+	$cur-padding: if($content-indent, $main-padding-min + $content-padding-min, $main-padding-min);
+
+	@if $negative == false {
+		#{$side}: $cur-padding !important;
+	}
+
+	@if $negative == true {
+		#{$side}: -$cur-padding !important;
+	}
+
+	// больше минималки (мобилка)
+	@media (min-width: $content-width-min + 1) {
+		$cur-padding: if($content-indent, $main-padding-mobile + $content-padding-mobile, $main-padding-mobile);
+
+		@if $negative == false {
+			#{$side}: $cur-padding !important;
+		}
+
+		@if $negative == true {
+			#{$side}: -$cur-padding !important;
+		}
+	}
+
+	// больше мобилки (средняя)
+	@media (min-width: $content-width-mobile + 1) {
+		$cur-padding: if($content-indent, $main-padding-middle + $content-padding-middle, $main-padding-middle);
+
+		@if $negative == false {
+			#{$side}: $cur-padding !important;
+		}
+
+		@if $negative == true {
+			#{$side}: -$cur-padding !important;
+		}
+	}
+
+	// больше средней (большая)
+	@media (min-width: $content-width-middle + 1) {
+		$cur-padding: if($content-indent, $main-padding-max + $content-padding-max, $main-padding-max);
+		//$cur-padding: -1 * $cur-padding;
+
+		@if $negative == false {
+			#{$side}: $cur-padding !important;
+		}
+
+		@if $negative == true {
+			#{$side}: -$cur-padding !important;
+		}
+	}
+
+	// при экранах больше максимальной ширины (+ 100 пикселей для плавности)
+	@media (min-width: $content-width-max + 100) {
+		$cur-padding: if($content-indent, $main-padding-over-max + $content-padding-over-max, $main-padding-over-max);
+
+		@if $negative == false {
+			#{$side}: $cur-padding !important;
+		}
+
+		@if $negative == true {
+			#{$side}: -$cur-padding !important;
+		}
+	}
+}
+
+// миксин даёт отрицательный margin-top равный межстрочному интенрвалу ($line-height)
+// чтобы всё было ровно и красиво, как на картинке
+@mixin true-top-position($line-height: $global-lineheight) {
+	$lh: ($line-height - floor($line-height)) + 'em';
+
+	margin-top: -#{$lh};
+}
+
+// миксин задаёт margin-bottom за вычетом отступа от line-height
+// чтобы всё было ровно и красиво, как на картинке
+@mixin true-bottom-margin($margin: $margin, $line-height: $global-lineheight) {
+	$lh: $line-height - floor($line-height) + 'em';
+
+	margin-bottom: calc(#{$margin} - #{$lh});
+}
+
+/*
+Миксин сетки, который работает по типу миксина foundation:
+- даёт контейнеру отрицательные боковые маржины равные половине $gutter
+$top - даст отрицательный margin-top равный $gutter, чтобы подтянуть элементы (если у них есть отступы по вертикале)
+$gutter-output - задавать отступы или нет
+*/
+@mixin grid-container($gutter: $gutter-grid, $top: false, $gutter-output: true) {
+	@if ($gutter-output == true) {
+		$margin-em-val: $gutter / ($gutter * 0 + 1);
+		$margin-em-unit: unit($gutter);
+		$margin: $margin-em-val / 2;
+		$margin: (ceil($margin * 100) / 100) + $margin-em-unit;
+
+		margin-left: -#{$margin};
+		margin-right: -#{$margin};
+
+		@if ($top == true) {
+			margin-top: -#{$gutter};
+		}
+	}
+}
+
+/*
+Миксин сетки, который работает по типу миксина foundation:
+- даёт элементу ширину за вычетом $gutter
+- даёт элементу боковые маржины равные половине $gutter
+
+$size - кол-во ячеек (можно указать как: 2 | 20% | 300px | 3 of 12 | stretch)
+$gutter - пустое пространство между ячейками (в любых единицах)
+$gutter-output - нужно выводить отступы или нет. Если false, то боковые маржины не даются, а из ширины вычитается ($gutter / 4)
+$top - нужно давать отступ с верху или нет. нужно, чтобы сделать отступы у элементов по вертикале. тогда тут и в grid-container пишется $top: true.
+
+Например:
+
+	@include grid-cell(2); - две ячейки (по 50%)
+	@include grid-cell(20%); - пять ячеек (по 20%)
+	@include grid-cell(300px); - ячейки по 300px (сколько влезет)
+	@include grid-cell(3 of 12); - 4 ячейки (по 25%)
+	@include grid-cell('stretch'); - растянуть с помощью flex: 1 1 auto;
+
+	Две ячейки (первая 20%, а вторая 80%):
+	&__item {
+		@include grid-cell(20%);
+	}
+	&__item:nth-child(even) {
+		@include grid-cell(80%);
+	}
+*/
+@mixin grid-cell($size: 0, $gutter: $gutter-grid, $gutter-output: true, $top: false) {
+	$cur-width: 0;
+	$width: 100%;
+	$margin-em-val: $gutter / ($gutter * 0 + 1);
+	$margin-em-unit: unit($gutter);
+	$margin: $margin-em-val / 2;
+	$margin: (ceil($margin * 100) / 100) + $margin-em-unit;
+
+	@if ($size != 0) {
+		@if type-of($size) == 'number' {
+			@if unit($size) == '' {
+				$width: (100 / $size) + '%';
+			}
+
+			@else {
+				$width: $size;
+			}
+		}
+
+		@else if type-of($size) == 'list' {
+			@if length($size) > 2 {
+				$width: percentage(nth($size, 1) / nth($size, 3));
+			}
+		}
+	}
+
+	@if ($gutter > 0) {
+		@if ($gutter-output != true) {
+			$gutter: $gutter / 4;
+		}
+
+		$cur-width: calc(#{$width} - #{$gutter});
+	}
+
+	@else {
+		$cur-width: #{$width};
+	}
+
+	@if $size == 'stretch' {
+		flex: 1 1 auto;
+	}
+
+	@else {
+		flex: 0 0 auto;
+		width: #{$cur-width};
+	}
+
+	@if ($gutter-output == true) {
+		margin-left: #{$margin};
+		margin-right: #{$margin};
+	}
+
+	@if ($gutter-output == true and $top == true) {
+		margin-top: #{$gutter};
+	}
+}
+
+/*
+Миксин даёт блоку стандартные стили
+*/
+@mixin block-standart($gutter: $gutter-block) {
+	margin-bottom: #{$gutter};
+
+	& > :last-child {
+		margin-bottom: 0 !important;
+	}
+}
+
+/*
+Вычисляет ширину в зависимости от переданных данных:
+
+get-width(2); - 50%
+get-width(20%); - 20%
+get-width(300px); - 300px
+get-width(1 of 12); - 8.333%
+*/
+@function get-width($size: 0) {
+	$width: 100%;
+
+	@if ($size != 0) {
+		@if type-of($size) == 'number' {
+			@if unit($size) == '' {
+				$width: (100 / $size) + '%';
+			}
+
+			@else {
+				$width: $size;
+			}
+		}
+
+		@else if type-of($size) == 'list' {
+			@if length($size) > 2 {
+				$width: percentage(nth($size, 1) / nth($size, 3));
+			}
+		}
+	}
+
+	@return #{$width};
+}
+
+@function strip-unit($num) {
+	@return $num / ($num * 0 + 1);
+}
+
+/*
+Функция для перевода значения $value в пикселях в значение в ремах на основе $base-value
+*/
+@function px-to-rem($value, $base-value: $global-font-size) {
+	$value: strip-unit($value) / strip-unit($base-value);
+
+	@if ($value > 0) {
+		$value: $value * 1rem;
+	}
+
+	@return $value;
+}
+
+/*
+Функция для перевода значения $value в пикселях в значение в емах на основе $base-value
+*/
+@function px-to-em($value, $base-value: $global-font-size) {
+	$value: strip-unit($value) / strip-unit($base-value);
+
+	@if ($value > 0) {
+		$value: $value * 1em;
+	}
+
+	@return $value;
+}

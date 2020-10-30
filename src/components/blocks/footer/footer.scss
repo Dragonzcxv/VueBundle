@@ -1,0 +1,8 @@
+@import "../../../style/style.scss";
+
+$block-name: 'b-footer';
+
+.#{$block-name} {
+	display: flex;
+	justify-content: flex-start;
+}

@@ -1,0 +1,11 @@
+@import "../../../style/style.scss";
+
+$block-name: 'b-grid-example';
+
+.#{$block-name} {
+	color: white;
+
+	& > :last-child {
+		margin-bottom: 0 !important;
+	}
+}

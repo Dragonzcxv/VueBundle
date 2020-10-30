@@ -1,0 +1,21 @@
+@import "../style";
+
+@include site-fonts();
+
+body {
+	background: $body-background;
+	color: $body-font-color;
+	font-family: $body-font-family;
+	font-size: $global-font-size;
+	font-weight: $global-weight-normal;
+	line-height: $global-lineheight;
+	margin: 0;
+	padding: 0;
+
+	@include wysiwyg();
+
+	.c-hidden {
+		display: block;
+		opacity: 0.5;
+	}
+}

@@ -1,0 +1,170 @@
+//Пользовательские переменные
+
+//Цвета, по возможности желательно придерживаться этого формата
+$color-white:#fff;
+$color-black: #000;
+$color-gray: #8f959e;
+$color-gray-light: #e5e5e5;
+$color-gray-dark: #8a8a8a;
+$color-yellow: yellow;
+$color-green: #008162;
+$color-blue: blue;
+$color-red: red;
+$color-green-light: #eafaf0;
+
+// габаритные размеры и отступы
+// брекпоинты по ним: @include for-width ('content-width-max') {}
+$content-width-max: 1920px; // максимальная ширина сайта
+$content-width-middle: 1500px; // с какого разрешения начинается средняя версия
+$content-width-mobile: 820px; // с какого разрешения начинается мобильная версия
+$content-width-min: 320px; // минимальная ширина сайта
+$content-padding-over-max: 10.75rem; // паддинг контента СТРАНИЦЫ если экран больше макс.ширины (обычно равен 0)
+$content-padding-max: 10.75rem; // паддинг контента СТРАНИЦЫ для большой версии
+$content-padding-middle: 0.75rem; // паддинг контента СТРАНИЦЫ для средней версии
+$content-padding-mobile: 0; // паддинг контента СТРАНИЦЫ для мобильной версии
+$content-padding-min: 0; // паддинг контента СТРАНИЦЫ для минималки
+$main-padding-over-max: 6.75rem; // паддинг для MAIN если экран больше макс.ширины (обычно равен 0)
+$main-padding-max: 6.75rem; // паддинг для MAIN для большой версии
+$main-padding-middle: 4.75rem; // паддинг для MAIN для средней версии
+$main-padding-mobile: 0.75rem; // паддинг для MAIN для мобильной версии
+$main-padding-min: 0.75rem; // паддинг для MAIN для минималки
+$header-height: 5.5rem; // общая высота для b-layout__header (используется при fixed шапке, b-layout__main-global, c-first-screen)
+$header-height-small: 5rem;
+
+//Foundation - глобальная конфигурация шрифта
+$global-font-size: 20px; // для большой версии
+$global-font-size-middle: 18px; // для средней версии
+$global-font-size-mobile: 16px; // для мобильной версии
+$global-font-size-min: 14px; // для минимальной версии
+$global-lineheight: 1.4; // межстрочный интервал
+$global-lineheight-h: 1.2; // межстрочный интервал для заголовков h1, h2, h3, h4
+$global-weight-light: 300;
+$global-weight-normal: 400; // глообальная жирность текста
+$global-weight-medium: 500;
+$global-weight-semiBold: 600;
+$global-weight-bold: 700; // жирность для b, strong, .strong, .c-strong, h1, h2, h3, h4...
+$margin-p: 0.6rem; // margin-bottom у p и li
+$margin-em-p: 0.6em; // margin-bottom у p и li (используется по умолчанию)
+$margin-h1: 3rem; // margin-bottom у h1
+$margin-h2: 1.5rem; // margin-bottom у h2
+$margin-h3: 0; // margin-bottom у h3
+$margin-h4: 2.5rem; // margin-bottom у h4
+$margin-top-multiplier: 1.5; // на что нужно умножить заданный для заголовка margin-bottom, чтобы получился margin-top (чтобы в полотне текста заголовки разделяли блоки). работает если для корневого блока прописан класс c-content
+
+// Настройки разрывов (отступов) между различными блоками на сайте
+$gutter-layout: 1.5rem; // разрыв между осн.элементами: b-layout__main, b-layout__header, b-layout__footer (маржин у футера и хедера) можно задать через клас c-space-layout
+$gutter-main-content: 0; // отступ сверху/снизу у b-layout__main-content (margin по дефолту)
+$gutter-block: 3.5rem; // разрыв между блоками контента (пишем margin-bottom: $gutter-block; - устанавливается в миксине block-standart, можно задать через клас c-space-block)
+$gutter-grid: 0.65rem; // разрыв между элементами (используется в миксине сетки grid-cell можно задать через клас c-space-grid)
+
+// размеры шрифтов в зависимости от глобального
+$fs-12: 0.6rem;
+$fs-13: 0.65rem;
+$fs-14: 0.7rem;
+$fs-18: 0.9rem;
+$fs-20: 1rem;
+$fs-25: 1.25rem;
+$fs-22: 1.1rem;
+$fs-24: 1.6rem;
+$fs-26: 1.3rem;
+$fs-30: 1.5rem;
+$fs-32: 1.6rem;
+$fs-34: 1.7rem;
+$fs-35: 1.75rem;
+$fs-36: 1.8rem;
+$fs-40: 2rem;
+$fs-44: 2.2rem;
+$fs-45: 2.25rem;
+$fs-65: 3.25rem;
+
+//Foundation - основные параметры body
+$body-background: $color-white; // b-layout
+$body-font-color: $color-black;
+$body-font-family: 'Montserrat', 'Roboto', 'Arial', 'Helvetica', sans-serif;
+$body-font-size: 1rem; // b-layout (по умолчанию равен 1rem, но можно поменять)
+
+// марджины фиксированные
+$margin: 1rem;
+$margin-5: 0.2rem;
+$margin-10: 0.5rem;
+$margin-16: 0.8rem;
+$margin-22: 1.1rem;
+$margin-30: 1.5rem;
+$margin-40: 2rem;
+$margin-50: 2.5rem;
+$margin-60: 3rem;
+$margin-80: 4rem;
+$margin-120: 6rem;
+$margin-160: 8rem;
+// марджины гибкие
+$margin-em: 1em;
+$margin-em-5: 0.2em;
+$margin-em-10: 0.5em;
+$margin-em-16: 0.8em;
+$margin-em-22: 1.1em;
+$margin-em-30: 1.5em;
+$margin-em-40: 2em;
+$margin-em-50: 2.5em;
+$margin-em-60: 3em;
+$margin-em-80: 4em;
+$margin-em-120: 6em;
+$margin-em-160: 8em;
+
+// Брекпоинты по ширине, использовать так: @include for-width ('740') {} или @include for-width('740', 'down') или так: @media (min-width: map-get($breakpoints-width, "740")) {}
+$breakpoints-width: (
+	'zero': 0,
+	'320': 320px,
+	'360': 360px,
+	'420': 420px,
+	'480': 480px,
+	'580': 580px,
+	'650': 650px,
+	'740': 740px,
+	'820': 820px,
+	'960': 960px,
+	'1100': 1100px,
+	'1200': 1200px,
+	'1400': 1400px,
+	'1500': 1500px,
+	'1600': 1600px,
+	'1920': 1920px,
+);
+// Брекпоинты по высоте, использовать так: @include for-height ('600') {} или @include for-width('600', 'down') или так: @media (min-height: map-get($breakpoints-height, "600")) {}
+$breakpoints-height: (
+	'zero': 0,
+	'320': 320px,
+	'360': 360px,
+	'420': 420px,
+	'480': 480px,
+	'540': 540px,
+	'600': 600px,
+	'740': 740px,
+	'820': 820px,
+	'940': 940px,
+	'1000': 1000px,
+	'1200': 1200px,
+	'1400': 1400px,
+);
+
+//Foundation - настройки сеток
+$grid-columns: 12;
+$global-width: 1200px;
+$global-gutter: 20px;
+$breakpoints: (
+	small: 0,
+	medium: 768px,
+	large: 1024px,
+	xlarge: 1280px,
+);
+$grid-margin-gutters: (
+	small: 20px,
+	medium: 20px,
+	large: 20px,
+	xlarge: 20px,
+);
+$grid-container-padding: (
+	small: 20px,
+	medium: 20px,
+	large: 20px,
+	xlarge: 20px,
+);

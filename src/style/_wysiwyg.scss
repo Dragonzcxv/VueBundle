@@ -1,0 +1,471 @@
+@mixin wysiwyg () {
+	// делает блок высотой 100vh и вычитает высоту шапки
+	.c-first-screen {
+		height: calc(100vh - #{$header-height}) !important;
+		overflow: hidden !important;
+	}
+
+	// задаёт блоку высоту равную высоте экрана
+	.c-100vh {
+		height: 100vh !important;
+		overflow: hidden !important;
+	}
+
+	h1,
+	.h1,
+	.c-h1 {
+		width: 100%;
+		margin: 0;
+		font-weight: $global-weight-bold;
+		font-size: $fs-36;
+		line-height: $global-lineheight-h;
+		text-transform: none;
+		word-wrap: break-word;
+		word-break: break-word;
+
+		@include true-bottom-margin($margin: $margin-h1, $line-height: $global-lineheight-h);
+
+		@include for-width('820') {
+			font-size: $fs-44;
+		}
+
+		@include for-width('1200') {
+			font-size: $fs-65;
+		}
+	}
+
+	h2,
+	.h2,
+	.c-h2 {
+		width: 100%;
+		margin: 0;
+		font-weight: $global-weight-bold;
+		line-height: $global-lineheight-h;
+		font-size: $fs-45;
+		word-wrap: break-word;
+		word-break: break-word;
+
+		@include true-bottom-margin($margin: $margin-h2, $line-height: $global-lineheight-h);
+
+		@include for-width('580') {
+			word-wrap: normal;
+			word-break: normal;
+		}
+	}
+
+	h3,
+	.h3,
+	.c-h3 {
+		width: 100%;
+		margin: ($margin-h3 * $margin-top-multiplier) 0 0;
+		font-weight: $global-weight-light;
+		line-height: $global-lineheight-h;
+		font-size: $fs-30;
+		word-wrap: break-word;
+		word-break: break-word;
+
+		@include true-bottom-margin($margin: $margin-h3, $line-height: $global-lineheight-h);
+
+		@include for-width('580') {
+			word-wrap: normal;
+			word-break: normal;
+		}
+
+		@include for-width('820') {
+			font-size: $fs-35;
+		}
+
+		@include for-width('1200') {
+			font-size: $fs-40;
+		}
+	}
+
+	h4,
+	.h4,
+	.c-h4 {
+		width: 100%;
+		margin: ($margin-h4 * $margin-top-multiplier) 0 0;
+		font-weight: $global-weight-semiBold;
+		line-height: $global-lineheight-h;
+		font-size: $fs-35;
+		word-wrap: break-word;
+		word-break: break-word;
+
+		@include true-bottom-margin($margin: $margin-h4, $line-height: $global-lineheight-h);
+
+		@include for-width('580') {
+			word-wrap: normal;
+			word-break: normal;
+		}
+	}
+
+	big,
+	.big,
+	.c-big {
+		font-size: 1rem * 1.5;
+	}
+
+	small,
+	.small,
+	.c-small {
+		font-size: 1rem * 0.5;
+	}
+
+	.c-bigger {
+		font-size: 2em;
+	}
+
+	.c-smaller {
+		font-size: 0.5em;
+	}
+
+	b,
+	strong,
+	.strong,
+	.c-strong {
+		font-weight: $global-weight-bold;
+	}
+
+	hr {
+		width: 100%;
+		border: none;
+		border-bottom: 2px solid $color-gray;
+	}
+
+	ul {
+		width: 100%;
+		padding: 0 0 0 $margin-em-40;
+		margin: 0 0 $margin-em-p;
+
+		> li {
+			margin: 0 0 $margin-em-p;
+		}
+
+		> li:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	p {
+		width: 100%;
+		padding: 0;
+		margin: 0 0 $margin-em-p;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: underline;
+		outline: none;
+		border: 0;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		&:not([href]) {
+			border-bottom: 1px dashed $color-gray;
+			text-decoration: none;
+
+			&:hover {
+				border-bottom: 1px solid transparent;
+			}
+		}
+	}
+
+	sup,
+	sub {
+		top: -0.555em;
+		font-size: 0.555em;
+	}
+
+	blockquote {
+		width: 100%;
+		margin: 0 0 $margin-em-p;
+		padding: 0;
+		font-size: $fs-22;
+	}
+
+	.c-color-black {
+		color: $color-black;
+	}
+
+	.c-color-gray {
+		color: $color-gray;
+	}
+
+	.c-color-red {
+		color: $color-red;
+	}
+
+	input {
+		outline: none;
+	}
+
+	.c-nomargin {
+		margin: 0 !important;
+	}
+
+	.c-block {
+		display: block;
+		width: 100%;
+	}
+
+	.c-right {
+		float: right;
+		margin: 0 0 10px 10px;
+	}
+
+	.c-left {
+		float: left;
+		margin: 0 10px 10px 0;
+	}
+
+	.c-hidden {
+		display: none;
+	}
+
+	.c-br {
+		display: block;
+	}
+
+	.c-center-align {
+		display: flex;
+		align-items: center;
+	}
+
+	.c-center-all {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.c-left-all {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+
+	.c-right-all {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+
+	.c-comment {
+		font-size: 1rem;
+		color: $color-gray-light;
+	}
+
+	.c-button {
+		display: inline-block;
+		background-color: transparent;
+		padding: $margin-em-10 $margin-em-30;
+		border: 1px solid $color-yellow;
+		border-radius: 1.3em;
+		text-decoration: none;
+		line-height: 1;
+		text-align: center;
+		text-transform: uppercase;
+		font-size: 1em;
+		font-weight: 600;
+		color: $color-yellow;
+		cursor: pointer;
+
+		&:hover {
+			background-color: $color-yellow;
+			color: $color-white;
+		}
+
+		&--blue {
+			border: 1px solid $color-blue;
+			color: $color-blue;
+
+			&:hover {
+				background-color: $color-blue;
+				color: $color-white;
+			}
+		}
+
+		&--white {
+			border: 1px solid $color-white;
+			color: $color-white;
+
+			&:hover {
+				background-color: $color-white;
+				color: $color-black;
+			}
+		}
+
+		&--black {
+			border: 1px solid $color-black;
+			color: $color-black;
+
+			&:hover {
+				background-color: $color-black;
+				color: $color-white;
+			}
+		}
+	}
+
+	.c-icon {
+		position: relative;
+		display: inline-block;
+		width: 1.3em;
+		height: 1.3em;
+		margin-right: 0.5em;
+		background-color: $color-blue;
+		border-radius: 50%;
+		border: 0 solid transparent;
+		line-height: 1;
+		vertical-align: s650;
+		text-decoration: none;
+		color: $color-white;
+
+		&--simple {
+			width: auto;
+			height: auto;
+			padding: 0;
+
+			& i {
+				font-size: inherit !important;
+			}
+		}
+
+		&--empty {
+			opacity: 0;
+		}
+
+		& i {
+			font-size: 0.77em;
+
+			&::before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				z-index: 1;
+				transform: translate(-51%, -50%);
+			}
+		}
+	}
+
+	.c-max-width-big {
+		width: 100%;
+		max-width: 1100px;
+	}
+
+	.c-max-width-middle {
+		width: 100%;
+		max-width: 650px;
+	}
+
+	.c-adaptive-width-100 {
+		width: auto;
+	}
+
+	.c-adaptive-width-90 {
+		width: auto;
+
+		@include for-width('content-mobile') {
+			width: 90%;
+		}
+	}
+
+	.c-adaptive-width-80 {
+		width: auto;
+
+		@include for-width('content-width-mobile') {
+			width: 80%;
+		}
+	}
+
+	.c-adaptive-width-70 {
+		width: auto;
+
+		@include for-width('content-width-mobile') {
+			width: 70%;
+		}
+	}
+
+	.c-adaptive-width-60 {
+		width: auto;
+
+		@include for-width('content-width-mobile') {
+			width: 60%;
+		}
+	}
+
+	.c-adaptive-width-50 {
+		width: auto;
+
+		@include for-width('content-width-mobile') {
+			width: 50%;
+		}
+	}
+
+	.c-width-80 {
+		width: 80%;
+	}
+
+	.c-width-70 {
+		width: 70%;
+	}
+
+	.c-width-33 {
+		width: 33%;
+	}
+
+	.c-width-30 {
+		width: 30%;
+	}
+
+	.c-space,
+	.c-space-block {
+		margin-bottom: $gutter-block;
+	}
+
+	.c-space-grid {
+		margin-bottom: $gutter-grid;
+	}
+
+	.c-space-layout {
+		margin-bottom: $gutter-layout;
+	}
+
+	// @each $name, $value in $breakpoints {
+	// 	.c-#{$name}-hidden {
+	// 		@include breakpoint(#{$name} only) {
+	// 			display: none;
+	// 		}
+	// 	}
+	// }
+
+	// стили для элементов вставляемого текста (дескрипшены всякие)
+	// тобишь, если нужно вывести описание страницы, то нужно это сделать в блок с классом c-content
+	.c-content {
+		& > *:first-child {
+			margin-top: 0 !important;
+		}
+
+		& > *:last-child {
+			margin-bottom: 0 !important;
+		}
+
+		h2,
+		.h2,
+		.c-h2 {
+			margin-top: ($margin-h2 * $margin-top-multiplier);
+		}
+
+		h3,
+		.h3,
+		.c-h3 {
+			margin-top: ($margin-h3 * $margin-top-multiplier);
+		}
+
+		h4,
+		.h4,
+		.c-h4 {
+			margin-top: ($margin-h4 * $margin-top-multiplier);
+		}
+	}
+}

@@ -1,0 +1,21 @@
+@import "../../../style/style.scss";
+
+$block-name: 'b-header';
+
+.#{$block-name} {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	height: #{$header-height};
+	background-color: green;
+	font-size: $fs-22;
+
+	.b-layout--scroll & {
+		box-shadow: 0 0 5px rgba(73, 77, 97, 0.25), 0 0 3px rgba(73, 77, 97, 0.1);
+	}
+
+	&__content {
+		width: 100%;
+	}
+}

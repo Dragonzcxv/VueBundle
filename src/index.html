@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body class="b-layout">
+	<div class="b-layout__global"></div> <!--сюда что-то, что должно быть глобальным на всей странице (всякие абсолюты/фикседы) -->
+	<div id="app" class="b-layout__content">
+		<header class="b-layout__header b-layout__header--fixed">
+			<header-block></header-block>
+		</header> <!--b-layout__header--fixed b-layout__header--absolute-->
+		
+		<main class="b-layout__main">
+			<div class="b-layout__main-global"></div> <!--сюда что-то, что не должно или не может попасть в контент-->
+
+			<div class="b-layout__main-content">
+				<router-view></router-view>
+			</div>
+		</main>
+
+		<footer class="b-layout__footer">
+			<footer-block></footer-block>
+		</footer>
+	</div>
+</body>
+
+</html>

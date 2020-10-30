@@ -1,0 +1,228 @@
+// Файл для подключения шрифтов и библиотек.
+// Писать в этом файле свои стили ОЧЕНЬ не рекомендуется, все стили должны быть разнесены по блокам.
+@import "../style";
+
+@include site-fonts();
+
+html {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: visible;
+
+	// для средних экранов чуть уменьшаем базовый размер шрифта
+	@media (max-width: $content-width-middle) {
+		font-size: $global-font-size-middle;
+	}
+
+	// для мобилок устанавливаем мобильный базовый размер шрифта
+	@media (max-width: $content-width-mobile) {
+		font-size: $global-font-size-mobile;
+	}
+
+	// для минималки устанавливаем минимальный базовый размер шрифта
+	@media (max-width: $content-width-min) {
+		font-size: $global-font-size-min;
+	}
+
+	&.no-scroll {
+		overflow: hidden;
+	}
+}
+
+body {
+	display: flex;
+	//height: 100%;
+
+	// Почему минимальная ширина не прописана в foundation не знаю, но она нужна, поэтому пришлось запихнуть в этот файл
+	min-width: $content-width-min;
+
+	// в faundation прописано box-sizing: inherit, а у нас весь лейаут работает через паддинги
+	// в результате сетка в некоторых случаях ломается
+	// чтобы этого не происходило делаем так
+	& * {
+		box-sizing: border-box;
+	}
+
+	//Если есть сомнения о необходимости примения стилей ко всему содержимому тега, то переносим в нужные блоки/элементы
+	@include wysiwyg;
+}
+
+// даёт блоку отрицательный маржин слева равный заданному в переменных $main-padding-
+.l-stretch-left {
+	@include layout-negative-margin($side: 'left');
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта
+	& .l-stretch-content {
+		@include layout-negative-margin-content($side: 'left');
+	}
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта (с помощью маржинов)
+	& .l-stretch-content-margin {
+		@include layout-negative-margin-content($side: 'left', $indent-margin: true);
+	}
+}
+
+// даёт блоку отрицательный маржин справа равный заданному в переменных $main-padding-
+.l-stretch-right {
+	@include layout-negative-margin($side: 'right');
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта
+	& .l-stretch-content {
+		@include layout-negative-margin-content($side: 'right');
+	}
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта (с помощью маржинов)
+	& .l-stretch-content-margin {
+		@include layout-negative-margin-content($side: 'right', $indent-margin: true);
+	}
+}
+
+// даёт блоку отрицательные маржины слева|справа равные заданному в переменных $main-padding-
+.l-stretch-all {
+	@include layout-negative-margin($side: 'all');
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта
+	& .l-stretch-content {
+		@include layout-negative-margin-content($side: 'all');
+	}
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта (с помощью маржинов)
+	& .l-stretch-content-margin {
+		@include layout-negative-margin-content($side: 'all', $indent-margin: true);
+	}
+}
+
+// даёт блоку отрицательный маржин слева равный заданному в переменных $main-padding- и $content-padding-
+.l-stretch-left-all {
+	@include layout-negative-margin($side: 'left', $content-indent: true);
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта
+	& .l-stretch-content {
+		@include layout-negative-margin-content($side: 'left', $content-indent: true);
+	}
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта (с помощью маржинов)
+	& .l-stretch-content-margin {
+		@include layout-negative-margin-content($side: 'left', $content-indent: true, $indent-margin: true);
+	}
+}
+
+// даёт блоку отрицательный маржин справа равный заданному в переменных $main-padding- и $content-padding-
+.l-stretch-right-all {
+	@include layout-negative-margin($side: 'right', $content-indent: true);
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта
+	& .l-stretch-content {
+		@include layout-negative-margin-content($side: 'right', $content-indent: true);
+	}
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта (с помощью маржинов)
+	& .l-stretch-content-margin {
+		@include layout-negative-margin-content($side: 'right', $content-indent: true, $indent-margin: true);
+	}
+}
+
+// даёт блоку отрицательные маржины слева|справа равные заданному в переменных $main-padding- и $content-padding-
+.l-stretch-all-all {
+	@include layout-negative-margin($side: 'all', $content-indent: true);
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта
+	& .l-stretch-content {
+		@include layout-negative-margin-content($side: 'all', $content-indent: true);
+	}
+
+	// вложенному блоку с этим классом делаем теже отступы, что и у контента сайта (с помощью маржинов)
+	& .l-stretch-content-margin {
+		@include layout-negative-margin-content($side: 'all', $content-indent: true, $indent-margin: true);
+	}
+}
+
+// растягивает элемент на всю ширину окна
+.l-stretch-global-all {
+	@include layout-negative-margin-global($side: 'all');
+
+	// вложенному блоку делаем теже размеры/отступы, что и основному контенту сайта
+	& .l-stretch-content {
+		@include content-max-width();
+	}
+}
+
+// растягивает элемент на всю ширину окна
+.l-stretch-global-left {
+	@include layout-negative-margin-global($side: 'left');
+
+	// вложенному блоку делаем теже размеры/отступы, что и основному контенту сайта
+	& .l-stretch-content {
+		@include content-max-width();
+	}
+}
+
+// растягивает элемент на всю ширину окна
+.l-stretch-global-right {
+	@include layout-negative-margin-global($side: 'right');
+
+	// вложенному блоку делаем теже размеры/отступы, что и основному контенту сайта
+	& .l-stretch-content {
+		@include content-max-width();
+	}
+}
+
+// задаёт отступ слева равный переменным $main-padding- (с помощью паддинга)
+.l-indent-left {
+	@include layout-negative-margin-content($side: 'left');
+}
+
+// задаёт отступ слева равный переменным $main-padding- (с помощью маржина)
+.l-indent-left-margin {
+	@include layout-negative-margin-content($side: 'left', $indent-margin: true);
+}
+
+// задаёт отступ слева равный переменным $main-padding- и $content-padding (с помощью паддинга)
+.l-indent-left-all {
+	@include layout-negative-margin-content($side: 'left', $content-indent: true);
+}
+
+// задаёт отступ слева равный переменным $main-padding- и $content-padding (с помощью маржина)
+.l-indent-left-all-margin {
+	@include layout-negative-margin-content($side: 'left', $content-indent: true, $indent-margin: true);
+}
+
+// задаёт отступ справа равный переменным $main-padding- (с помощью падинга)
+.l-indent-right {
+	@include layout-negative-margin-content($side: 'right');
+}
+
+// задаёт отступ справа равный переменным $main-padding- (с помощью маржина)
+.l-indent-right-margin {
+	@include layout-negative-margin-content($side: 'right', $indent-margin: true);
+}
+
+// задаёт отступ справа равный переменным $main-padding- и $content-padding (с помощью падинга)
+.l-indent-right-all {
+	@include layout-negative-margin-content($side: 'right', $content-indent: true);
+}
+
+// задаёт отступ справа равный переменным $main-padding- и $content-padding (с помощью маржина)
+.l-indent-right-all-margin {
+	@include layout-negative-margin-content($side: 'right', $content-indent: true, $indent-margin: true);
+}
+
+// задаёт отступ слева и справа равный переменным $main-padding- (с помощью падинга)
+.l-indent-all {
+	@include layout-negative-margin-content($side: 'all');
+}
+
+// задаёт отступ слева и справа равный переменным $main-padding- (с помощью маржина)
+.l-indent-all-margin {
+	@include layout-negative-margin-content($side: 'all', $indent-margin: true);
+}
+
+// задаёт отступ слева и справа равный переменным $main-padding- и $content-padding (с помощью падинга)
+.l-indent-all-all {
+	@include layout-negative-margin-content($side: 'all', $content-indent: true);
+}
+
+// задаёт отступ слева и справа равный переменным $main-padding- и $content-padding (с помощью маржина)
+.l-indent-all-all-margin {
+	@include layout-negative-margin-content($side: 'all', $content-indent: true, $indent-margin: true);
+}
